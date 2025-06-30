@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>
+    async function enviarEmail(e) {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const mensagem = document.getElementById('mensagem').value;
+
+      try {
+        const resposta = await fetch('http://localhost:3000/enviar-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, email, mensagem }),
+        });
+
+        if (resposta.ok) {
+          alert('Email enviado com sucesso!');
+          e.target.reset();
+        } else {
+          alert('Erro ao enviar email. Tente novamente.');
+        }
+      } catch {
+        alert('Erro de conexão. Verifique se o servidor está rodando.');
+      }
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EPSIF Store - Contato</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+    }
+    header {
+      background-color: #111827;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #facc15;
+    }
+    .banner {
+      background-image: linear-gradient(to right, #1f2937, #111827);
+      color: #fff;
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .banner h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .contact-section {
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input,
+    textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #333;
+      color: #fff;
+      font-size: 1rem;
+    }
+    button {
+      padding: 12px;
+      background-color: #facc15;
+      border: none;
+      border-radius: 8px;
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #e0b306;
+    }
+    footer {
+      background-color: #111827;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EPSIF Store</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="contato.html" class="active">Contato</a>
+    </nav>
+  </header>
+
+  <section class="banner">
+    <h2>Fale Conosco</h2>
+    <p>Preencha o formulário abaixo e responderemos em breve:</p>
+  </section>
+
+  <section class="contact-section">
+    <form onsubmit="enviarEmail(event)">
+      <input type="text" id="nome" placeholder="Seu nome" required />
+      <input type="email" id="email" placeholder="Seu e-mail" required />
+      <textarea id="mensagem" rows="5" placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EPSIF Store • Desenvolvido por Eloi Ibiapino Filho</p>
+  </footer>
+</body>
+</html>
