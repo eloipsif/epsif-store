@@ -10,7 +10,7 @@
       const mensagem = document.getElementById('mensagem').value;
 
       try {
-        const resposta = await fetch('https://epsif-store.onrender.com', {
+        const resposta = await fetch('http://localhost:3000/enviar-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nome, email, mensagem }),
